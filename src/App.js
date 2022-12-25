@@ -28,7 +28,7 @@ function App() {
           <Route exact path='/pages/custman' element={<CustMan/>}/>
           <Route exact path='/pages/routman' element={<RoutMan/>}/>
           <Route exact path='/pages/routes/addroute' element={<AddRoute/>}/>
-          <Route exact path='/pages/routes/editroute' element={<EditRoute/>}/>
+          <Route exact path='/pages/routes/editroute/:id' element={<EditRoute/>}/>
         </Routes>
 
       </Router>
