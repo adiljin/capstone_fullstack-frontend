@@ -47,7 +47,7 @@ export default function ViewUser() {
                             </ul>
                         </div>
                     </div>
-                    <Link type='submit' className='btn btn-outline-success my-2'to={'/'}>Back Home</Link>
+                    <Link type='submit' className='btn btn-outline-success my-2'to={'/pages/main'}>Back Home</Link>
                 </div>
             </div>
         </div>
