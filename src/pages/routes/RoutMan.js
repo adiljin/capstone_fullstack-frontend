@@ -42,6 +42,7 @@ export default function RoutMan() {
                             route.map((routee, index) =>
                                 <tr>
                                     <th scope="row" key={index}>{index + 1}</th>
+                                    {/* <td>{routee.id}</td> */}
                                     <td>{routee.portName}</td>
                                     <td>{routee.priceFrom}</td>
                                     {/* <td>{routee.id}</td> */}

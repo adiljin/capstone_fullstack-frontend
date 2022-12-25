@@ -12,6 +12,7 @@ import CustMan from './pages/cust/CustMan';
 import RoutMan from './pages/routes/RoutMan';
 import AddRoute from './pages/routes/AddRoute';
 import EditRoute from './pages/routes/EditRoute';
+import AddClient from './pages/client/AddClient';
 
 function App() {
   return (
@@ -24,8 +25,12 @@ function App() {
           <Route exact path='/adduser' element={<AddUser/>}/>
           <Route exact path='/edituser/:id' element={<EditUser/>}/>
           <Route exact path='/viewuser/:id' element={<ViewUser/>}/>
+
           <Route exact path='/pages/clientman' element={<ClientMan/>}/>
+          <Route exact path='/pages/clientman/addclient' element={<AddClient/>}/>
+
           <Route exact path='/pages/custman' element={<CustMan/>}/>
+
           <Route exact path='/pages/routman' element={<RoutMan/>}/>
           <Route exact path='/pages/routes/addroute' element={<AddRoute/>}/>
           <Route exact path='/pages/routes/editroute/:id' element={<EditRoute/>}/>
