@@ -7,7 +7,7 @@ export default function AddClient() {
 
     let navigate = useNavigate()
 
-    const [client, setCli] = useState({
+    const [client, setUser] = useState({
         name: "",
         address: "",
         number: "",
@@ -17,22 +17,7 @@ export default function AddClient() {
     const { name, address, number, e_mail } = client
 
     const onInputChange = (e) => {
-        setCli({ ...client, [e.target.name]: e.target.value })
-
-        // Check the selected option and update the name state variable accordingly
-        if (e.target.value === 'cruise') {
-            setCli({ ...client, name: 'Option 1 selected' });
-        } else if (e.target.value === 'cargo') {
-            setCli({ ...client, name: 'Option 2 selected' });
-        } else if (e.target.value === 'tugboat') {
-            setCli({ ...client, name: 'Option 3 selected' });
-        } else if (e.target.value === 'barge') {
-            setCli({ ...client, name: 'Option 2 selected' });
-        } else if (e.target.value === 'container') {
-            setCli({ ...client, name: 'Option 3 selected' });
-        } else if (e.target.value === 'tanker') {
-            setCli({ ...client, name: 'Option 3 selected' });
-        }
+        setUser({ ...client, [e.target.name]: e.target.value })
     }
 
 
@@ -47,30 +32,25 @@ export default function AddClient() {
 
     }
 
-    const [selectedOption, setSelectedOption] = useState('option1');
-
     return (
         <div className='container'>
             <div className='row'>
                 <div className='col-md-6 offset-md-3 border rounded p-4 mt-2 shadow'>
                     <h2 className='text-center m-4'>Register Shipping Company</h2>
-
                     <form onSubmit={(e) => onSubmit(e)}>
-                        <div>
-                            <div className='text-start'>
+                        <table className="table border shaow">
+                            <div class="my-4" className='mb-3 text-start'>
                                 <label htmlFor='name' className='form-label'>
-                                    Company name
+                                    Company suka
                                 </label>
-                                <div>
-                                    <input
-                                        type={"text"}
-                                        className="form-control"
-                                        placeholder="Company name"
-                                        name="name"
-                                        value={name}
-                                        onChange={(e) => onInputChange(e)}
-                                    />
-                                </div>
+                                <input
+                                    type={"text"}
+                                    className="form-control"
+                                    placeholder="Company name"
+                                    name="name"
+                                    value={name}
+                                    onChange={(e) => onInputChange(e)}
+                                />
                             </div>
                             <div className='mb-3 text-start'>
                                 <label htmlFor='address' className='form-label'>
@@ -111,32 +91,8 @@ export default function AddClient() {
                                     onChange={(e) => onInputChange(e)}
                                 />
                             </div>
-
-                            {/* Dropdown */}
-                            <div class="btn-group d-grid gap-2 my-2" role="group" aria-label="Button group with nested dropdown">
-                                <label htmlFor='ship' className='form-label text-start'>
-                                    Ship type
-                                </label>
-                                <select
-                                    className="form-control"
-                                    name="ship"
-                                    value={name}
-                                    onChange={(e) => onInputChange(e)}
-                                >
-                                    <option value="cruise">Cruise</option>
-                                    <option value="cargo">Cargo</option>
-                                    <option value="tugboat">Tugboat</option>
-                                    <option value="barge">Barge</option>
-                                    <option value="container">Container</option>
-                                    <option value="tanker">Tanker</option>
-                                </select>
-                            </div>
-                            {/* Dropdown */}
-
-                        </div>
-
-
-                        <button type='submit' className='btn btn-outline-success my-3'>Submit</button>
+                        </table>
+                        <button type='submit' className='btn btn-outline-success'>Submit</button>
                         <Link type='submit' className='btn btn-outline-danger mx-2' to={'/pages/clientman'}>Cancel</Link>
                     </form>
                 </div>
