@@ -13,6 +13,8 @@ import RoutMan from './pages/routes/RoutMan';
 import AddRoute from './pages/routes/AddRoute';
 import EditRoute from './pages/routes/EditRoute';
 import AddClient from './pages/client/AddClient';
+import ViewClient from './pages/client/ViewClient';
+import EditClient from './pages/client/EditClient';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
 
           <Route exact path='/pages/clientman' element={<ClientMan/>}/>
           <Route exact path='/pages/clientman/addclient' element={<AddClient/>}/>
+          <Route exact path='/pages/clientman/viewcli' element={<ViewClient/>}/>
+          <Route exact path='/pages/clientman/editcli/:id' element={<EditClient/>}/>
 
           <Route exact path='/pages/custman' element={<CustMan/>}/>
 

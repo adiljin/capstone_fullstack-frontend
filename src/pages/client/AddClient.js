@@ -14,7 +14,7 @@ export default function AddClient() {
         e_mail: ""
     })
 
-    const { name, address, number, e_mail} = client
+    const { name, address, number, e_mail } = client
 
     const onInputChange = (e) => {
         setUser({ ...client, [e.target.name]: e.target.value })
@@ -22,14 +22,14 @@ export default function AddClient() {
 
 
     const onSubmit = async (e) => {
-        if(client.name!==""&&client.address!==""&&client.number!==""&&client.e_mail!==""){
+        if (client.name !== "" && client.address !== "" && client.number !== "" && client.e_mail !== "") {
             e.preventDefault();
             await axios.post("http://localhost:8080/company-ship", client)
             navigate("/pages/clientman")
-        }else{
+        } else {
             alert("Please fill out all fields.");
         }
-        
+
     }
 
     return (
@@ -39,61 +39,62 @@ export default function AddClient() {
                     <h2 className='text-center m-4'>Register Shipping Company</h2>
 
                     <form onSubmit={(e) => onSubmit(e)}>
-
-                        <div className='mb-3 text-start'>
-                            <label htmlFor='name' className='form-label'>
-                                Company name
-                            </label>
-                            <input
-                                type={"text"}
-                                className="form-control"
-                                placeholder="Company name"
-                                name="name"
-                                value={name}
-                                onChange={(e) => onInputChange(e)}
-                            />
-                        </div>
-                        <div className='mb-3 text-start'>
-                            <label htmlFor='address' className='form-label'>
-                                Address
-                            </label>
-                            <input
-                                type={"text"}
-                                className="form-control"
-                                placeholder="Address"
-                                name="address"
-                                value={address}
-                                onChange={(e) => onInputChange(e)}
-                            />
-                        </div>
-                        <div className='mb-3 text-start'>
-                            <label htmlFor='number' className='form-label'>
-                                Number
-                            </label>
-                            <input
-                                type={"text"}
-                                className="form-control"
-                                placeholder="Enter your email"
-                                name="number"
-                                value={number}
-                                onChange={(e) => onInputChange(e)}
-                            />
-                        </div>
-                        <div className='mb-3 text-start'>
-                            <label htmlFor='Email' className='form-label'>
-                                Email
-                            </label>
-                            <input
-                                type={"text"}
-                                className="form-control"
-                                placeholder="Email"
-                                name="e_mail"
-                                value={e_mail}
-                                onChange={(e) => onInputChange(e)}
-                            />
-                        </div>
+                        <table class="mx-1" className="table border shadow">
+                            <div className='mb-3 text-start'>
+                                <label htmlFor='name' className='form-label'>
+                                    Company name
+                                </label>
+                                <input
+                                    type={"text"}
+                                    className="form-control"
+                                    placeholder="Company name"
+                                    name="name"
+                                    value={name}
+                                    onChange={(e) => onInputChange(e)}
+                                />
+                            </div>
+                            <div className='mb-3 text-start'>
+                                <label htmlFor='address' className='form-label'>
+                                    Address
+                                </label>
+                                <input
+                                    type={"text"}
+                                    className="form-control"
+                                    placeholder="Address"
+                                    name="address"
+                                    value={address}
+                                    onChange={(e) => onInputChange(e)}
+                                />
+                            </div>
+                            <div className='mb-3 text-start'>
+                                <label htmlFor='number' className='form-label'>
+                                    Number
+                                </label>
+                                <input
+                                    type={"text"}
+                                    className="form-control"
+                                    placeholder="Enter your email"
+                                    name="number"
+                                    value={number}
+                                    onChange={(e) => onInputChange(e)}
+                                />
+                            </div>
+                            <div className='mb-3 text-start'>
+                                <label htmlFor='Email' className='form-label'>
+                                    Email
+                                </label>
+                                <input
+                                    type={"text"}
+                                    className="form-control"
+                                    placeholder="Email"
+                                    name="e_mail"
+                                    value={e_mail}
+                                    onChange={(e) => onInputChange(e)}
+                                />
+                            </div>
+                        </table>
                         <button type='submit' className='btn btn-outline-success'>Submit</button>
-                        <Link type='submit' className='btn btn-outline-danger mx-2'to={'/pages/clientman'}>Cancel</Link>
+                        <Link type='submit' className='btn btn-outline-danger mx-2' to={'/pages/clientman'}>Cancel</Link>
                     </form>
                 </div>
             </div>
