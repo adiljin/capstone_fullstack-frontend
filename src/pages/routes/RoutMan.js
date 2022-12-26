@@ -20,7 +20,6 @@ export default function RoutMan() {
         loadRoutes();
     }
 
-    console.log(route);
     return (
         <div className='container'>
             <div className='py-4'>
