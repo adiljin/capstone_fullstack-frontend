@@ -63,7 +63,7 @@ export default function ViewClient() {
                             <th scope="col">Years of leasing</th>
                             <th scope="col">Type of Lease</th>
                             <th scope="col">Price</th>
-                            <th scope="col">Min/Max</th>
+                            <th scope="col">Min/Max weight</th>
                             {/* <th scope="col">Test</th> */}
                         </tr>
                     </thead>

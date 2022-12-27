@@ -17,7 +17,12 @@ export default function AddClient() {
         years: "",
         typeLease: ""
     })
-    
+
+    const [tot, setTot] = useState({
+        tprice:"",
+        tlea:""
+    })
+
     const [wei, setWei] = useState({
         weightMin: "",
         weightMax: ""
@@ -27,9 +32,10 @@ export default function AddClient() {
         shipType: ""
     })
 
-    const { name, address, number, email, years, typeLease} = client
-    const {weightMin, weightMax} = wei
-    const {shipType} = shi
+    const { name, address, number, email, years, typeLease } = client
+    const { weightMin, weightMax } = wei
+    const { shipType } = shi
+    const { tprice, tlea} = tot
 
 
     const onInputChange = (e) => {
@@ -37,36 +43,45 @@ export default function AddClient() {
 
         // Check the selected option and update the name state variable accordingly
         if (e.target.value === 'cruise') {
-            setWei({...wei, weightMin: '50', weightMax: '1000'}) 
-            setShi({...shi, shipType: 'cruise'})
+            setWei({ ...wei, weightMin: '50', weightMax: '1000' })
+            setShi({ ...shi, shipType: 'cruise' })
+            setTot({ ...tot, tprice: '1000' })
         } else if (e.target.value === 'cargo') {
             setWei({ ...wei, weightMin: '2000', weightMax: '5000' });
-            setShi({...shi, shipType: 'cargo'})
+            setShi({ ...shi, shipType: 'cargo' })
+            setTot({ ...tot, tprice: '2000' })
         } else if (e.target.value === 'tugboat') {
             setWei({ ...client, weightMin: '3000', weightMax: '6000' });
-            setShi({...shi, shipType: 'tugboat'})
+            setShi({ ...shi, shipType: 'tugboat' })
+            setTot({ ...tot, tprice: '3000' })
         } else if (e.target.value === 'barge') {
             setWei({ ...client, weightMin: '6000', weightMax: '9000' });
-            setShi({...shi, shipType: 'barge'})
+            setShi({ ...shi, shipType: 'barge' })
+            setTot({ ...tot, tprice: '5000' })
         } else if (e.target.value === 'container') {
             setWei({ ...client, weightMin: '7000', weightMax: '10000' });
-            setShi({...shi, shipType: 'container'})
+            setShi({ ...shi, shipType: 'container' })
+            setTot({ ...tot, tprice: '6000' })
         } else if (e.target.value === 'tanker') {
             setWei({ ...client, weightMin: '5000', weightMax: '8000' });
-            setShi({...shi, shipType: 'tanker'})
+            setShi({ ...shi, shipType: 'tanker' })
+            setTot({ ...tot, tprice: '4000' })
         }
         if (e.target.value === 'contract') {
-            setCli({ ...client, typeLease: 'contract'});
-        } else if(e.target.value === 'operating'){
-            setCli({ ...client, typeLease: 'operating'});
+            setCli({ ...client, typeLease: 'contract' });
+            setTot({ ...tot, tlea: '9%' })
+        } else if (e.target.value === 'operating') {
+            setCli({ ...client, typeLease: 'operating' });
+            setTot({ ...tot, tlea: '7%' })
         }
+        
     }
 
     const onSubmit = async (e) => {
         if (client.name !== "" && client.address !== "" && client.number !== "" && client.email !== "" && client.years !== "" && client.typeLease !== "") {
             e.preventDefault();
             await axios.post(`http://localhost:8080/${shi.shipType}`, client)
-            navigate("/pages/clientman/addclient")
+            navigate("/pages/clientman")
         } else {
             console.log(client.name + " " + client.address + " " + client.number + " " + client.email + " " + client.years + " " + client.typeLease + " " + shi.shipType)
             alert("Please fill out all fields.");
@@ -168,12 +183,12 @@ export default function AddClient() {
                                         onChange={(e) => onInputChange(e)}
                                     >
                                         <option>Choose ship type</option>
-                                        <option value="cruise">Cruise</option>
-                                        <option value="cargo">Cargo</option>
-                                        <option value="tugboat">Tugboat</option>
-                                        <option value="barge">Barge</option>
-                                        <option value="tanker">Tanker</option>
-                                        <option value="container">Container</option>
+                                        <option value="cruise">Cruise - 1000/year</option>
+                                        <option value="cargo">Cargo - 2000/year</option>
+                                        <option value="tugboat">Tugboat - 3000/year</option>
+                                        <option value="barge">Barge - 5000/year</option>
+                                        <option value="tanker">Tanker - 4000/year</option>
+                                        <option value="container">Container - 6000/year</option>
                                     </select>
                                 </div>
                                 {/* Dropdown */}
@@ -189,8 +204,8 @@ export default function AddClient() {
                                         onChange={(e) => onInputChange(e)}
                                     >
                                         <option>Choose Lease</option>
-                                        <option value="contract">Contract</option>
-                                        <option value="operating">Operating</option>
+                                        <option value="contract">Contract - 9%</option>
+                                        <option value="operating">Operating - 7%</option>
                                     </select>
                                 </div>
                                 {/* Dropdown */}
@@ -227,7 +242,9 @@ export default function AddClient() {
                                     />
                                 </div>
                             </div>
-
+                            <label class='fw-lighter' htmlFor='max' className='form-label'>
+                                Total = {tprice} * {years} / {tlea}
+                            </label>
                         </div>
 
 
