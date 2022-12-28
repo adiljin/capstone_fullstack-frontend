@@ -34,11 +34,6 @@ export default function ViewClient() {
         });
     };
 
-    // const loadClients = async () => {
-    //     const result = await axios.get("http://localhost:8080/cruise/cruises");
-    //     setClients(result.data);
-    // };
-
     const deleteRoute = async (id, cls) => {
         console.log(cls);
         await axios.delete(`http://localhost:8080/${cls}/del/${id}`)
@@ -84,9 +79,9 @@ export default function ViewClient() {
                                         <td>{client.price}</td>
                                         <td>{client.weightMin + "/" + client.weightMax}</td>
                                         <td>
-                                        <Link className='btn btn-outline-success mx-2' to={`/pages/clientman/editcli/${client.id}`}>Edit</Link>
-                                        <button className='btn btn-outline-danger mx-2' onClick={() => deleteRoute(client.id, client.type.toLowerCase())}>Delete</button>
-                                    </td>
+                                            <Link className='btn btn-outline-success mx-2' to={`/pages/clientman/editcli/${client.type.toLowerCase()}/${client.id}`}>Edit</Link>
+                                            <button className='btn btn-outline-danger mx-2' onClick={() => deleteRoute(client.id, client.type.toLowerCase())}>Delete</button>
+                                        </td>
                                     </tr>
 
 
@@ -104,10 +99,10 @@ export default function ViewClient() {
                             //         <td>{client.years}</td>
                             //         <td>{client.typeLease}</td>
                             //         {/* <td>{routee.id}</td> */}
-                                    // <td>
-                                    //     <Link className='btn btn-outline-success mx-2' to={`/pages/clientman/editcli/${client.id}`}>Edit</Link>
-                                    //     <button className='btn btn-outline-danger mx-2' onClick={() => deleteRoute(client.id, client.type.toLowerCase())}>Delete</button>
-                                    // </td>
+                            // <td>
+                            //     <Link className='btn btn-outline-success mx-2' to={`/pages/clientman/editcli/${client.id}`}>Edit</Link>
+                            //     <button className='btn btn-outline-danger mx-2' onClick={() => deleteRoute(client.id, client.type.toLowerCase())}>Delete</button>
+                            // </td>
                             //     </tr>
                             // )
                         }

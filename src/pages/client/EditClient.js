@@ -5,9 +5,11 @@ import { Link } from 'react-router-dom'
 
 export default function EditClient() {
 
+    const { type, id } = useParams()
+    // const {id} = useParams()
+
     let navigate = useNavigate()
 
-    const {id} = useParams()
 
     const [client, setClient] = useState({
         name: "",
@@ -16,7 +18,7 @@ export default function EditClient() {
         e_mail: ""
     })
 
-    const { name, address, number, e_mail} = client
+    const { name, address, number, email} = client
 
     const onInputChange = (e) => {
         setClient({ ...client, [e.target.name]: e.target.value })
@@ -30,8 +32,8 @@ export default function EditClient() {
     const onSubmit = async (e) => {
         if(client.name!==""&&client.address!==""&&client.number!==""&&client.e_mail!==""){
             e.preventDefault();
-            await axios.put(`http://localhost:8080/company-ship/company/${id}`, client)
-            navigate("/pages/clientman")
+            await axios.put(`http://localhost:8080/${type}/${id}`, client)
+            navigate(`/pages/clientman/viewcli`)
         }else{
             alert("Please fill out all fields.");
         }
@@ -40,7 +42,7 @@ export default function EditClient() {
 
     // Show current name, email, username to change
     const loadClient = async()=>{
-        const result=await axios.get(`http://localhost:8080/company-ship/companies/${id}`)
+        const result=await axios.get(`http://localhost:8080/${type}/${type}s/${id}`)
         setClient(result.data)
     }
 
@@ -85,10 +87,12 @@ export default function EditClient() {
                             <input
                                 type={"text"}
                                 className="form-control"
-                                placeholder="Enter price"
+                                placeholder="Enter number"
                                 name="number"
                                 value={number}
                                 onChange={(e) => onInputChange(e)}
+                                pattern="[0-9]*"
+                                inputmode="numeric"
                             />
                         </div>
                         <div className='mb-3 text-start'>
@@ -98,14 +102,14 @@ export default function EditClient() {
                             <input
                                 type={"text"}
                                 className="form-control"
-                                placeholder="Enter price"
-                                name="e_mail"
-                                value={e_mail}
+                                placeholder="Enter email"
+                                name="email"
+                                value={email}
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>
                         <button type='submit' className='btn btn-outline-success'>Submit</button>
-                        <Link type='submit' className='btn btn-outline-danger mx-2'to={'/pages/clientman'}>Cancel</Link>
+                        <Link type='submit' className='btn btn-outline-danger mx-2'to={`/pages/clientman/viewcli`}>Cancel</Link>
                     </form>
                 </div>
             </div>

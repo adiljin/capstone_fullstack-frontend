@@ -32,7 +32,7 @@ function App() {
           <Route exact path='/pages/clientman' element={<ClientMan/>}/>
           <Route exact path='/pages/clientman/addclient' element={<AddClient/>}/>
           <Route exact path='/pages/clientman/viewcli' element={<ViewClient/>}/>
-          <Route exact path='/pages/clientman/editcli/:id' element={<EditClient/>}/>
+          <Route exact path='/pages/clientman/editcli/:type/:id' element={<EditClient/>}/>
 
           <Route exact path='/pages/custman' element={<CustMan/>}/>
 
