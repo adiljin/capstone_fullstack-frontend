@@ -79,8 +79,8 @@ export default function ViewClient() {
                                         <td>{client.price}</td>
                                         <td>{client.weightMin + "/" + client.weightMax}</td>
                                         <td>
-                                            <Link className='btn btn-outline-success mx-2' to={`/pages/clientman/editcli/${client.type.toLowerCase()}/${client.id}`}>Edit</Link>
-                                            <button className='btn btn-outline-danger mx-2' onClick={() => deleteRoute(client.id, client.type.toLowerCase())}>Delete</button>
+                                            <Link className='btn btn-sm btn-outline-success mx-2' to={`/pages/clientman/editcli/${client.type.toLowerCase()}/${client.id}`}>Edit</Link>
+                                            <button className='btn btn-sm btn-outline-danger mx-2' onClick={() => deleteRoute(client.id, client.type.toLowerCase())}>Delete</button>
                                         </td>
                                     </tr>
 
