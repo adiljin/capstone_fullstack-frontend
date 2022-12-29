@@ -3,35 +3,35 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
-export default function EditClient() {
+export default function EditCust() {
 
     let navigate = useNavigate()
 
     const {id} = useParams()
 
-    const [client, setClient] = useState({
+    const [cust, setCust] = useState({
         name: "",
         address: "",
         number: "",
         e_mail: ""
     })
 
-    const { name, address, number, e_mail} = client
+    const { name, address, number, e_mail} = cust
 
     const onInputChange = (e) => {
-        setClient({ ...client, [e.target.name]: e.target.value })
+        setCust({ ...cust, [e.target.name]: e.target.value })
     }
 
     // Show current name, email, username to change
     useEffect(()=>{
-        loadClient()
+        loadCust()
     },[])
 
     const onSubmit = async (e) => {
-        if(client.name!==""&&client.address!==""&&client.number!==""&&client.e_mail!==""){
+        if(cust.name!==""&&cust.address!==""&&cust.number!==""&&cust.e_mail!==""){
             e.preventDefault();
-            await axios.put(`http://localhost:8080/company-ship/company/${id}`, client)
-            navigate("/pages/clientman")
+            await axios.put(`http://localhost:8080/cust/set/${id}`, cust)
+            navigate("/pages/cust/viewcust")
         }else{
             alert("Please fill out all fields.");
         }
@@ -39,9 +39,9 @@ export default function EditClient() {
     }
 
     // Show current name, email, username to change
-    const loadClient = async()=>{
-        const result=await axios.get(`http://localhost:8080/company-ship/companies/${id}`)
-        setClient(result.data)
+    const loadCust = async()=>{
+        const result=await axios.get(`http://localhost:8080/cust/${id}`)
+        setCust(result.data)
     }
 
     return (
@@ -54,7 +54,7 @@ export default function EditClient() {
 
                         <div className='mb-3 text-start'>
                             <label htmlFor='portName' className='form-label'>
-                                Company name
+                                Customer name
                             </label>
                             <input
                                 type={"text"}
@@ -88,6 +88,8 @@ export default function EditClient() {
                                 placeholder="Enter price"
                                 name="number"
                                 value={number}
+                                pattern="[0-9]*"
+                                inputmode="numeric"
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>
@@ -105,7 +107,7 @@ export default function EditClient() {
                             />
                         </div>
                         <button type='submit' className='btn btn-outline-success'>Submit</button>
-                        <Link type='submit' className='btn btn-outline-danger mx-2'to={'/pages/clientman'}>Cancel</Link>
+                        <Link type='submit' className='btn btn-outline-danger mx-2'to={'/pages/cust/viewcust'}>Cancel</Link>
                     </form>
                 </div>
             </div>

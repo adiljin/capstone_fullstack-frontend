@@ -2,29 +2,29 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom';
 
-export default function ViewClient() {
-    const [client, setClients] = useState([])
+export default function ViewCust() {
+    const [cust, setCust] = useState([])
     useEffect(() => {
-        loadClients();
+        loadCust();
     }, []);
 
     const { id } = useParams()
 
-    const loadClients = async () => {
-        const result = await axios.get("http://localhost:8080/company-ship/companies");
-        setClients(result.data);
+    const loadCust = async () => {
+        const result = await axios.get("http://localhost:8080/cust/get");
+        setCust(result.data);
     };
 
     const deleteRoute = async (id) => {
-        await axios.delete(`http://localhost:8080/company-ship/company/${id}`)
-        loadClients();
+        await axios.delete(`http://localhost:8080/cust/${id}`)
+        loadCust();
     }
 
     return (
         <div className='container'>
             <div className='py-4'>
                 <div class="d-grid mx-auto">
-                    <Link type='submit' className='btn btn-outline-dark' to={'/pages/clientman'}>Return</Link>
+                    <Link type='submit' className='btn btn-outline-dark' to={'/pages/CustMan'}>Return</Link>
                 </div>
                 <table className="table border shadow">
                     <thead>
@@ -39,18 +39,18 @@ export default function ViewClient() {
                     </thead>
                     <tbody>
                         {
-                            client.map((client, index) =>
+                            cust.map((cust, index) =>
                                 <tr>
                                     <th scope="row" key={index}>{index + 1}</th>
                                     {/* <td>{routee.id}</td> */}
-                                    <td>{client.name}</td>
-                                    <td>{client.address}</td>
-                                    <td>{client.number}</td>
-                                    <td>{client.e_mail}</td>
+                                    <td>{cust.name}</td>
+                                    <td>{cust.address}</td>
+                                    <td>{cust.number}</td>
+                                    <td>{cust.e_mail}</td>
                                     {/* <td>{routee.id}</td> */}
                                     <td>
-                                        <Link className='btn btn-outline-success mx-2' to={`/pages/clientman/editcli/${client.id}`}>Edit</Link>
-                                        <button className='btn btn-outline-danger mx-2' onClick={() =>deleteRoute(client.id)}>Delete</button>
+                                        <Link className='btn btn-outline-success mx-2' to={`/pages/cust/editcust/${cust.id}`}>Edit</Link>
+                                        <button className='btn btn-outline-danger mx-2' onClick={() =>deleteRoute(cust.id)}>Delete</button>
                                     </td>
                                 </tr>
                             )

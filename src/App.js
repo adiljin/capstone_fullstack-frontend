@@ -10,6 +10,9 @@ import ViewUser from './users/ViewUser';
 import ClientMan from './pages/client/ClientMan';
 import Main from './pages/Main';
 import CustMan from './pages/cust/CustMan';
+import AddCust from './pages/cust/AddCust';
+import ViewCust from './pages/cust/ViewCust';
+import EditCust from './pages/cust/EditCust';
 import RoutMan from './pages/routes/RoutMan';
 import AddRoute from './pages/routes/AddRoute';
 import EditRoute from './pages/routes/EditRoute';
@@ -35,6 +38,9 @@ function App() {
           <Route exact path='/pages/clientman/editcli/:type/:id' element={<EditClient/>}/>
 
           <Route exact path='/pages/custman' element={<CustMan/>}/>
+          <Route exact path='/pages/cust/addcust' element={<AddCust/>}/>
+          <Route exact path='/pages/cust/viewcust' element={<ViewCust/>}/>
+          <Route exact path='/pages/cust/editcust/:id' element={<EditCust/>}/>
 
           <Route exact path='/pages/routman' element={<RoutMan/>}/>
           <Route exact path='/pages/routes/addroute' element={<AddRoute/>}/>
