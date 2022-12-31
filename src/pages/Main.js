@@ -11,7 +11,7 @@ export default function Main() {
                         <Link class="btn btn-dark" type="button" to={`/pages/ClientMan`}>Client Management</Link>
                         <Link class="btn btn-dark" type="button" to={`/pages/CustMan`}>Customer Management</Link>
                         <Link class="btn btn-dark" type="button" to={`/pages/RoutMan`}>Routes Management</Link>
-                        <button class="btn btn-dark" type="button">Freights Management</button>
+                        <Link class="btn btn-dark" type="button" to={`/pages/FreMan`}>Freights Management</Link>
                         <button class="btn btn-dark" type="button">Manage Users</button>
                         <button class="btn btn-dark my-4" type="button">Change User</button>
                     </div>
