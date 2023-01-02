@@ -21,6 +21,7 @@ import ViewClient from './pages/client/ViewClient';
 import EditClient from './pages/client/EditClient';
 import FreMan from './pages/fre/FreMan';
 import AddFre from './pages/fre/AddFre';
+import ViewFre from './pages/fre/ViewFre';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
 
           <Route exact path='/pages/freman' element={<FreMan/>}/>
           <Route exact path='/pages/freman/addfre' element={<AddFre/>}/>
+          <Route exact path='/pages/freman/viewfre' element={<ViewFre/>}/>
         </Routes>
 
       </Router>

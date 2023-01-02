@@ -41,6 +41,25 @@ export default function AddFre() {
         priceFrom: "",
     })
 
+    const [freight, setFreight] = useState({
+        customer: "",
+        ship: "",
+        routeF: "",
+        routeT: "",
+        weight: "",
+        price: "",
+        routesPrice: ""
+    })
+
+
+    const [freWeight, setWei] = useState({
+        weight: ""
+    })
+
+    const [frePrice, setfre] = useState({
+        price: ""
+    })
+
     const [filteredRoute, setfilteredRoute] = useState([])
 
     const [selectRouteTo, setselectRouteTo] = useState({
@@ -107,32 +126,73 @@ export default function AddFre() {
 
 
     const onSubmit = async (e) => {
-        // if (client.name !== "" && client.address !== "" && client.number !== "" && client.email !== "" && client.years !== "" && client.typeLease !== "") {
-        //     e.preventDefault();
-        //     await axios.post(`http://localhost:8080/${shi.shipType}`, client)
-        //     navigate("/pages/clientman")
-        // } else {
-        //     console.log(client.name + " " + client.address + " " + client.number + " " + client.email + " " + client.years + " " + client.typeLease + " " + shi.shipType)
-        //     alert("Please fill out all fields.");
-        // }
+        if (freight.customer !== "" && freight.ship !== "" && freight.routeF !== "" && freight.routeT !== "" && freight.fweight !== "" && freight.price !== "") {
+            setFreight({ ...freight, fweight: freWeight, price: frePrice});
+            console.log(freight)
+            e.preventDefault();
+            await axios.post(`http://localhost:8080/fre`, freight)
+            navigate("/pages/freman")
+        } else {
+            e.preventDefault();
+            alert("Please fill out all fields.");
+        }
     }
 
     // const [selectedClient, setSelectedClient] = useState({null});
 
+    const genRoutesPrice = (list, routeF, routeT) => {
+        let result = 0;
+        let may = false;
+        for (let i = 0; i < list.length; i++) {
+            const troute = list[i];
+            if (troute.id === routeF.id) {
+                may = true;
+            } else if (troute.id === routeT.id) {
+                result += troute.priceFrom;
+                return result;
+            }
+            if (may) {
+                result += troute.priceFrom;
+            }
+        }
+        return result;
+    };
 
+    const genPrice = (list, routeF, routeT, weight, price) => {
+        let result = 0;
+        let may = false;
+        for (let i = 0; i < list.length; i++) {
+            const troute = list[i];
+            if (troute.id === routeF.id) {
+                may = true;
+            } else if (troute.id === routeT.id) {
+                result += troute.priceFrom;
+                setFreight({ ...freight, routesPrice: result });
+                result += (Number(weight)+Number(price)) * 0.4;
+                return result;
+            }
+            if (may) {
+                result += troute.priceFrom;
+            }
+        }
+        return result;
+    };
 
     const onInputChange = (e) => {
         if (e.target.name === "shipper") {
             const selectedClientId = e.target.value;
             const selectedClient = ships.flatMap(({ data }) => data).find(client => client.id == selectedClientId);
             setSelectedClient(selectedClient);
+            setFreight({ ...freight, ship: selectedClient });
         } else if (e.target.name === "customer") {
             const custId = e.target.value
             const selectCust = cust.find(cust => cust.id == custId);
             setselectCust(selectCust);
+            setFreight({ ...freight, customer: selectCust });
         } else if (e.target.name === "portFrom") {
             const routeId = e.target.value
             const selectRouteFrom = route.find(route => route.id == routeId);
+            setFreight({ ...freight, routeF: selectRouteFrom });
             setselectRouteFrom(selectRouteFrom);
             const filteredRoute = route.filter(r => r.id > e.target.value);
             setfilteredRoute(filteredRoute);
@@ -140,13 +200,21 @@ export default function AddFre() {
             const routeId = e.target.value
             const selectRouteTo = route.find(route => route.id == routeId);
             setselectRouteTo(selectRouteTo);
-        } else if (e.target.name === "weight"){
-            console.log(selectedClient.weightMin)
+            setFreight({ ...freight, routeT: selectRouteTo });
+        } else if (e.target.name === "weight") {
+            if (e.target.value < selectedClient.weightMin || e.target.value > selectedClient.weightMax) {
+                // Show error message or alert
+                const minWeight = parseInt(selectedClient.weightMin);
+                const maxWeight = parseInt(selectedClient.weightMax);
+                // alert("Weight must be between " + selectedClient.weightMin + " and " + selectedClient.weightMax);
+                // return;
+            }
+            const price = genPrice(route, selectRouteFrom, selectRouteTo, e.target.value, selectedClient.pricePerYear);
+            setfre(price)
+            setWei(e.target.value)
+            const routesPrices = genRoutesPrice(route, selectRouteFrom, selectRouteTo)
+            setFreight({ ...freight, weight: e.target.value, price: frePrice, routesPrice: routesPrices});
         }
-        // console.log(selectCust)
-        // console.log(selectedClient)
-        // console.log(selectRouteFrom)
-        // console.log(selectRouteTo)
     }
 
     return (
@@ -194,7 +262,7 @@ export default function AddFre() {
                                                 <option>Choose shipper</option>
                                                 {ships.map(({ type, data }) => (
                                                     data.map(client => (
-                                                        <option value={client.id}>{client.name}</option>
+                                                        <option value={client.id}>{client.type} - {client.name}</option>
                                                     ))
                                                 ))}
                                             </select>
@@ -311,7 +379,7 @@ export default function AddFre() {
                                         Load weight
                                     </label>
                                     <input
-                                        type={"text"}
+                                        type={"number"}
                                         className="form-control"
                                         placeholder="Type weight"
                                         name="weight"
@@ -319,7 +387,7 @@ export default function AddFre() {
                                         onChange={(e) => onInputChange(e)}
                                         pattern="[0-9]*"
                                         inputmode="numeric"
-                                        min="500"
+                                        min={selectedClient.weightMin}
                                         max={selectedClient.weightMax}
                                     />
                                 </div>
@@ -332,7 +400,7 @@ export default function AddFre() {
                                         className="form-control"
                                         placeholder="Price"
                                         name="years"
-                                        // value={years}
+                                        value={frePrice}
                                         onChange={(e) => onInputChange(e)}
                                         pattern="[0-9]*"
                                         inputmode="numeric"
@@ -345,7 +413,7 @@ export default function AddFre() {
 
 
                         <button type='submit' className='btn btn-outline-success my-3'>Submit</button>
-                        <Link type='submit' className='btn btn-outline-danger mx-2' to={'/pages/clientman'}>Cancel</Link>
+                        <Link type='submit' className='btn btn-outline-danger mx-2' to={'/pages/freman'}>Cancel</Link>
                     </form>
                 </div>
             </div>
