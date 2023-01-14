@@ -8,12 +8,11 @@ export default function AddUser() {
     let navigate = useNavigate()
 
     const [user, setUser] = useState({
-        name: "",
         username: "",
-        email: ""
+        password: "",
     })
 
-    const { name, username, email } = user
+    const { username, password } = user
 
     const onInputChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value })
@@ -37,21 +36,8 @@ export default function AddUser() {
                     <form onSubmit={(e) => onSubmit(e)}>
 
                         <div className='mb-3 text-start'>
-                            <label htmlFor='Name' className='form-label'>
-                                Name
-                            </label>
-                            <input
-                                type={"text"}
-                                className="form-control"
-                                placeholder="Enter your name"
-                                name="name"
-                                value={name}
-                                onChange={(e) => onInputChange(e)}
-                            />
-                        </div>
-                        <div className='mb-3 text-start'>
                             <label htmlFor='Username' className='form-label'>
-                                User Name
+                                Username
                             </label>
                             <input
                                 type={"text"}
@@ -64,14 +50,14 @@ export default function AddUser() {
                         </div>
                         <div className='mb-3 text-start'>
                             <label htmlFor='Email' className='form-label'>
-                                Email
+                                Password
                             </label>
                             <input
                                 type={"text"}
                                 className="form-control"
                                 placeholder="Enter your email"
-                                name="email"
-                                value={email}
+                                name="password"
+                                value={password}
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>
