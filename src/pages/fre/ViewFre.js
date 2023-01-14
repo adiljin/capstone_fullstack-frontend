@@ -11,12 +11,12 @@ export default function ViewFre() {
     const { id } = useParams()
 
     const loadFre = async () => {
-        const result = await axios.get("http://localhost:8080/fre/get");
+        const result = await axios.get("http://localhost:3000/fre/get");
         setCust(result.data);
     };
 
     const deleteRoute = async (id) => {
-        await axios.delete(`http://localhost:8080/fre/${id}`)
+        await axios.delete(`http://localhost:3000/fre/${id}`)
         loadFre();
     }
 

@@ -11,12 +11,22 @@ export default function RoutMan() {
     const { id } = useParams()
 
     const loadRoutes = async () => {
-        const result = await axios.get("http://localhost:8080/rout/routes");
+        const result = await axios.get("http://localhost:3000/rout/routes");
         setRoute(result.data);
     };
 
+    // function loadRoutes(){
+    //     fetch("http://localhost:8080/rout/routes", {
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    //         },
+    //         method: "GET",
+    //     })
+    // }
+
     const deleteRoute = async (id) => {
-        await axios.delete(`http://localhost:8080/rout/route/${id}`)
+        await axios.delete(`http://localhost:3000/rout/route/${id}`)
         loadRoutes();
     }
 

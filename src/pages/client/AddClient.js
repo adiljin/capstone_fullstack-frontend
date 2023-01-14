@@ -80,7 +80,7 @@ export default function AddClient() {
     const onSubmit = async (e) => {
         if (client.name !== "" && client.address !== "" && client.number !== "" && client.email !== "" && client.years !== "" && client.typeLease !== "") {
             e.preventDefault();
-            await axios.post(`http://localhost:8080/${shi.shipType}`, client)
+            await axios.post(`http://localhost:3000/${shi.shipType}`, client)
             navigate("/pages/clientman")
         } else {
             console.log(client.name + " " + client.address + " " + client.number + " " + client.email + " " + client.years + " " + client.typeLease + " " + shi.shipType)

@@ -28,14 +28,14 @@ export default function EditRoute() {
     const onSubmit = async (e) => {
         if(route.portName!==""&&route.priceFrom!==""){
             e.preventDefault();
-            await axios.put(`http://localhost:8080/rout/route/${id}`, route)
+            await axios.put(`http://localhost:3000/rout/route/${id}`, route)
         }
         navigate("/pages/routman")
     }
 
     // Show current name, email, username to change
     const loadRoute = async()=>{
-        const result=await axios.get(`http://localhost:8080/rout/route/${id}`)
+        const result=await axios.get(`http://localhost:3000/rout/route/${id}`)
         setRoute(result.data)
     }
 

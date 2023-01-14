@@ -50,6 +50,7 @@ export default function Login() {
 
             .then(([body, headers]) => {
                 setJwt(headers.get("authorization"));
+                // console.log("Local Storage" + localStorage.getItem("jwt"));
                 window.location.href = "/pages/Main";
             }).catch((message) => {
                 alert(message);
@@ -73,7 +74,7 @@ export default function Login() {
                             <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white' label='Password' id="password" name="password" value={password} type={"password"} onChange={(e) => setPassword(e.target.value)} size="lg" />
 
                             <button class="btn btn-dark btn-lg" id='submit' type='button' onClick={() => sendLoginRequest()}>
-                                Login
+                                LOGIN
                             </button>
 
                         </MDBCardBody>

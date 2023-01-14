@@ -26,7 +26,7 @@ export default function ViewClient() {
     const { id } = useParams()
 
     const loadClients = async () => {
-        const promises = ships.map(({ type }) => axios.get(`http://localhost:8080/${type}/${type}s`));
+        const promises = ships.map(({ type }) => axios.get(`http://localhost:3000/${type}/${type}s`));
         const responses = await Promise.all(promises);
         responses.forEach(({ data }, index) => {
             const { setter } = ships[index];
@@ -36,7 +36,7 @@ export default function ViewClient() {
 
     const deleteRoute = async (id, cls) => {
         console.log(cls);
-        await axios.delete(`http://localhost:8080/${cls}/del/${id}`)
+        await axios.delete(`http://localhost:3000/${cls}/del/${id}`)
         loadClients();
     }
 

@@ -22,7 +22,7 @@ export default function AddRoute() {
     const onSubmit = async (e) => {
         if(route.portName!==""&&route.priceFrom!==""){
             e.preventDefault();
-            await axios.post("http://localhost:8080/rout", route)
+            await axios.post("http://localhost:3000/rout", route)
         }
         navigate("/pages/routman")
     }
@@ -31,7 +31,7 @@ export default function AddRoute() {
         <div className='container'>
             <div className='row'>
                 <div className='col-md-6 offset-md-3 border rounded p-4 mt-2 shadow'>
-                    <h2 className='text-center m-4'>Register User</h2>
+                    <h2 className='text-center m-4'>Add Route</h2>
 
                     <form onSubmit={(e) => onSubmit(e)}>
 

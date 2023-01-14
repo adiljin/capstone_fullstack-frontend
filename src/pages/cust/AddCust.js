@@ -23,7 +23,7 @@ export default function AddCust() {
     const onSubmit = async (e) => {
         if (cust.name !== "" && cust.address !== "" && cust.number !== "" && cust.e_mail) {
             e.preventDefault();
-            await axios.post(`http://localhost:8080/cust`, cust)
+            await axios.post(`http://localhost:3000/cust`, cust)
             navigate("/pages/CustMan")
         } else {
             alert("Please fill out all fields.");

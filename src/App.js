@@ -27,8 +27,6 @@ import { PrivateRoute } from './pages/privateRoute/PrivateRoute';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-
-
 function App() {
 
   return (

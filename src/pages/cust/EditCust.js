@@ -30,7 +30,7 @@ export default function EditCust() {
     const onSubmit = async (e) => {
         if(cust.name!==""&&cust.address!==""&&cust.number!==""&&cust.e_mail!==""){
             e.preventDefault();
-            await axios.put(`http://localhost:8080/cust/set/${id}`, cust)
+            await axios.put(`http://localhost:3000/cust/set/${id}`, cust)
             navigate("/pages/cust/viewcust")
         }else{
             alert("Please fill out all fields.");
@@ -40,7 +40,7 @@ export default function EditCust() {
 
     // Show current name, email, username to change
     const loadCust = async()=>{
-        const result=await axios.get(`http://localhost:8080/cust/${id}`)
+        const result=await axios.get(`http://localhost:3000/cust/${id}`)
         setCust(result.data)
     }
 

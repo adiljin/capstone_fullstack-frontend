@@ -11,12 +11,12 @@ export default function ViewCust() {
     const { id } = useParams()
 
     const loadCust = async () => {
-        const result = await axios.get("http://localhost:8080/cust/get");
+        const result = await axios.get("http://localhost:3000/cust/get");
         setCust(result.data);
     };
 
     const deleteRoute = async (id) => {
-        await axios.delete(`http://localhost:8080/cust/${id}`)
+        await axios.delete(`http://localhost:3000/cust/${id}`)
         loadCust();
     }
 
