@@ -12,7 +12,7 @@ export default function AddRoute() {
         priceFrom: "",
     })
 
-    const { portName, priceFrom} = route
+    const { portName, priceFrom } = route
 
     const onInputChange = (e) => {
         setRoute({ ...route, [e.target.name]: e.target.value })
@@ -20,7 +20,7 @@ export default function AddRoute() {
 
 
     const onSubmit = async (e) => {
-        if(route.portName!==""&&route.priceFrom!==""){
+        if (route.portName !== "" && route.priceFrom !== "") {
             e.preventDefault();
             await axios.post("http://localhost:3000/rout", route)
         }
@@ -59,10 +59,12 @@ export default function AddRoute() {
                                 name="priceFrom"
                                 value={priceFrom}
                                 onChange={(e) => onInputChange(e)}
+                                pattern="[0-9]*"
+                                inputmode="numeric"
                             />
                         </div>
                         <button type='submit' className='btn btn-outline-success'>Submit</button>
-                        <Link type='submit' className='btn btn-outline-danger mx-2'to={'/pages/routman'}>Cancel</Link>
+                        <Link type='submit' className='btn btn-outline-danger mx-2' to={'/pages/routman'}>Cancel</Link>
                     </form>
                 </div>
             </div>
