@@ -28,6 +28,9 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 
 function App() {
+  useEffect(() => {
+    document.title = "Capstone App";
+  }, []);
 
   return (
     <div className="App">
