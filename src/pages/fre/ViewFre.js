@@ -15,6 +15,8 @@ export default function ViewFre() {
         setCust(result.data);
     };
 
+
+
     const deleteRoute = async (id) => {
         await axios.delete(`http://localhost:3000/fre/${id}`)
         loadFre();
@@ -30,6 +32,7 @@ export default function ViewFre() {
                     <thead>
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">Date</th>
                             <th scope="col">Customer</th>
                             <th scope="col">Ship</th>
                             <th scope="col">From</th>
@@ -45,6 +48,7 @@ export default function ViewFre() {
                                 <tr>
                                     <th scope="row" key={index}>{index + 1}</th>
                                     {/* <td>{routee.id}</td> */}
+                                    <td>{fre.createdAt}</td>
                                     <td>{fre.customer.name}</td>
                                     <td>{fre.ship.name} - {fre.ship.type}</td>
                                     <td>{fre.routeF.portName}</td>
