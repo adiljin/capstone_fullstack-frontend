@@ -8,7 +8,8 @@ export default function Main() {
             <div className='py-4'>
                 {
                     <div class="d-grid gap-2 col-6 mx-auto">
-                        <Link class="btn btn-dark" type="button" to={`/pages/ClientMan`}>Carrier Management</Link>
+                        <Link class="btn btn-dark" type="button" to={`/pages/RoutMan`}>Routes Management</Link>
+                        <Link class="btn btn-dark" type="button" to={`/pages/FreMan`}>Freights Management</Link>
                         <button class="btn btn-dark my-4" type="button" onClick={() => {
                             localStorage.clear();
                             window.location.href = "/login";

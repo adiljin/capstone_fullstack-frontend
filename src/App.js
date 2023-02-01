@@ -9,6 +9,8 @@ import EditUser from './users/EditUser';
 import ViewUser from './users/ViewUser';
 import ClientMan from './pages/client/ClientMan';
 import Main from './pages/Main';
+import MainLogist from './pages/logist/MainLogist';
+import MainCust from './pages/cust/MainCust';
 import CustMan from './pages/cust/CustMan';
 import AddCust from './pages/cust/AddCust';
 import ViewCust from './pages/cust/ViewCust';
@@ -16,6 +18,7 @@ import EditCust from './pages/cust/EditCust';
 import RoutMan from './pages/routes/RoutMan';
 import AddRoute from './pages/routes/AddRoute';
 import EditRoute from './pages/routes/EditRoute';
+import MainClient from './pages/client/MainClient';
 import AddClient from './pages/client/AddClient';
 import ViewClient from './pages/client/ViewClient';
 import EditClient from './pages/client/EditClient';
@@ -28,6 +31,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useUser } from './util/userProvider';
 import jwt_decode from "jwt-decode";
+
 
 function App() {
   const [roles, setRoles] = useState([]);
@@ -73,16 +77,32 @@ function App() {
                 </PrivateRoute>
               ) : roles.find((role) => role.authority === "ROLE_SHIP") ? (
                 <PrivateRoute>
-                  <AddUser />
+                  <MainClient />
                 </PrivateRoute>
               ) : null
             }
           /> */}
+          
+          MainLogist
 
           <Route exact path='/pages/main' element={
-            <PrivateRoute>
-              <Main />
-            </PrivateRoute>
+            roles.find((role) => role.authority === "ROLE_ADMIN") ? (
+              <PrivateRoute>
+                <Main />
+              </PrivateRoute>
+            ) : roles.find((role) => role.authority === "ROLE_SHIP") ? (
+              <PrivateRoute>
+                <MainClient />
+              </PrivateRoute>
+            ) : roles.find((role) => role.authority === "ROLE_CUST") ? (
+              <PrivateRoute>
+                <MainCust />
+              </PrivateRoute>
+            ) : roles.find((role) => role.authority === "ROLE_LOGIST") ? (
+              <PrivateRoute>
+                <MainLogist />
+              </PrivateRoute>
+            ) : null
           } />
           <Route exact path='/adduser' element={
             <PrivateRoute>
@@ -103,11 +123,11 @@ function App() {
           <Route exact path='/pages/clientman' element={
             roles.find((role) => role.authority === "ROLE_ADMIN" || role.authority === "ROLE_SHIP") ? (
               <PrivateRoute>
-                <CustMan />
+                <ClientMan />
               </PrivateRoute>
             ) : (
               <PrivateRoute>
-                <Main />
+                <Home />
               </PrivateRoute>
             )
           } />
@@ -150,58 +170,72 @@ function App() {
               <PrivateRoute>
                 <CustMan />
               </PrivateRoute>
-            ) : (
-              <PrivateRoute>
-                <Main />
-              </PrivateRoute>
-            )
+            ) : null
           } />
           <Route exact path='/pages/cust/addcust' element={
-            <PrivateRoute>
-              <AddCust />
-            </PrivateRoute>
+            roles.find((role) => role.authority === "ROLE_ADMIN" || role.authority === "ROLE_CUST") ? (
+              <PrivateRoute>
+                <AddCust />
+              </PrivateRoute>
+            ) : null
           } />
           <Route exact path='/pages/cust/viewcust' element={
-            <PrivateRoute>
-              <ViewCust />
-            </PrivateRoute>
+            roles.find((role) => role.authority === "ROLE_ADMIN" || role.authority === "ROLE_CUST") ? (
+              <PrivateRoute>
+                <ViewCust />
+              </PrivateRoute>
+            ) : null
           } />
           <Route exact path='/pages/cust/editcust/:id' element={
-            <PrivateRoute>
-              <EditCust />
-            </PrivateRoute>
+            roles.find((role) => role.authority === "ROLE_ADMIN" || role.authority === "ROLE_CUST") ? (
+              <PrivateRoute>
+                <EditCust />
+              </PrivateRoute>
+            ) : null
           } />
 
           <Route exact path='/pages/routman' element={
-            <PrivateRoute>
-              <RoutMan />
-            </PrivateRoute>
+            roles.find((role) => role.authority === "ROLE_ADMIN" || role.authority === "ROLE_LOGIST") ? (
+              <PrivateRoute>
+                <RoutMan />
+              </PrivateRoute>
+            ) : null
           } />
           <Route exact path='/pages/routes/addroute' element={
-            <PrivateRoute>
-              <AddRoute />
-            </PrivateRoute>
+            roles.find((role) => role.authority === "ROLE_ADMIN" || role.authority === "ROLE_LOGIST") ? (
+              <PrivateRoute>
+                <AddRoute />
+              </PrivateRoute>
+            ) : null
           } />
           <Route exact path='/pages/routes/editroute/:id' element={
-            <PrivateRoute>
-              <EditRoute />
-            </PrivateRoute>
+            roles.find((role) => role.authority === "ROLE_ADMIN" || role.authority === "ROLE_LOGIST") ? (
+              <PrivateRoute>
+                <EditRoute />
+              </PrivateRoute>
+            ) : null
           } />
 
           <Route exact path='/pages/freman' element={
-            <PrivateRoute>
-              <FreMan />
-            </PrivateRoute>
+            roles.find((role) => role.authority === "ROLE_ADMIN" || role.authority === "ROLE_LOGIST") ? (
+              <PrivateRoute>
+                <FreMan />
+              </PrivateRoute>
+            ) : null
           } />
           <Route exact path='/pages/freman/addfre' element={
-            <PrivateRoute>
-              <AddFre />
-            </PrivateRoute>
+            roles.find((role) => role.authority === "ROLE_ADMIN" || role.authority === "ROLE_LOGIST") ? (
+              <PrivateRoute>
+                <AddFre />
+              </PrivateRoute>
+            ) : null
           } />
           <Route exact path='/pages/freman/viewfre' element={
-            <PrivateRoute>
-              <ViewFre />
-            </PrivateRoute>
+            roles.find((role) => role.authority === "ROLE_ADMIN" || role.authority === "ROLE_LOGIST") ? (
+              <PrivateRoute>
+                <ViewFre />
+              </PrivateRoute>
+            ) : null
           } />
           <Route exact path='/login' element={<Login />} />
         </Routes>
