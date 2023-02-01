@@ -26,11 +26,32 @@ import Login from './pages/login/Login';
 import { PrivateRoute } from './pages/privateRoute/PrivateRoute';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useUser } from './util/userProvider';
+import jwt_decode from "jwt-decode";
 
 function App() {
+  const [roles, setRoles] = useState([]);
+
   useEffect(() => {
     document.title = "Capstone App";
+    setRoles(getRolesFromJWT());
   }, []);
+
+
+  // Check if JTW is empty
+  if (localStorage.getItem("jwt") == '""') {
+    console.log("NO JWT")
+  }
+
+  function getRolesFromJWT() {
+    const token = localStorage.getItem("jwt");
+    if (token !== '""') {
+      const decodedJwt = jwt_decode(localStorage.getItem("jwt"));
+      return decodedJwt.authorities;
+    }
+    return [];
+  }
+  roles.find((role) => "Role: " + console.log(role.authority))
 
   return (
     <div className="App">
@@ -42,6 +63,22 @@ function App() {
               <Home />
             </PrivateRoute>
           } />
+
+          {/* <Route
+            path="/dashboard"
+            element={
+              roles.find((role) => role.authority === "ROLE_ADMIN") ? (
+                <PrivateRoute>
+                  <Main />
+                </PrivateRoute>
+              ) : roles.find((role) => role.authority === "ROLE_SHIP") ? (
+                <PrivateRoute>
+                  <AddUser />
+                </PrivateRoute>
+              ) : null
+            }
+          /> */}
+
           <Route exact path='/pages/main' element={
             <PrivateRoute>
               <Main />
@@ -64,30 +101,60 @@ function App() {
           } />
 
           <Route exact path='/pages/clientman' element={
-            <PrivateRoute>
-              <ClientMan />
-            </PrivateRoute>
+            roles.find((role) => role.authority === "ROLE_ADMIN" || role.authority === "ROLE_SHIP") ? (
+              <PrivateRoute>
+                <CustMan />
+              </PrivateRoute>
+            ) : (
+              <PrivateRoute>
+                <Main />
+              </PrivateRoute>
+            )
           } />
           <Route exact path='/pages/clientman/addclient' element={
-            <PrivateRoute>
-              <AddClient />
-            </PrivateRoute>
+            roles.find((role) => role.authority === "ROLE_ADMIN" || role.authority === "ROLE_SHIP") ? (
+              <PrivateRoute>
+                <AddClient />
+              </PrivateRoute>
+            ) : (
+              <PrivateRoute>
+                <Main />
+              </PrivateRoute>
+            )
           } />
           <Route exact path='/pages/clientman/viewcli' element={
-            <PrivateRoute>
-              <ViewClient />
-            </PrivateRoute>
+            roles.find((role) => role.authority === "ROLE_ADMIN" || role.authority === "ROLE_SHIP") ? (
+              <PrivateRoute>
+                <ViewClient />
+              </PrivateRoute>
+            ) : (
+              <PrivateRoute>
+                <Main />
+              </PrivateRoute>
+            )
           } />
           <Route exact path='/pages/clientman/editcli/:type/:id' element={
-            <PrivateRoute>
-              <EditClient />
-            </PrivateRoute>
+            roles.find((role) => role.authority === "ROLE_ADMIN" || role.authority === "ROLE_SHIP") ? (
+              <PrivateRoute>
+                <EditClient />
+              </PrivateRoute>
+            ) : (
+              <PrivateRoute>
+                <Main />
+              </PrivateRoute>
+            )
           } />
 
           <Route exact path='/pages/custman' element={
-            <PrivateRoute>
-              <CustMan />
-            </PrivateRoute>
+            roles.find((role) => role.authority === "ROLE_ADMIN" || role.authority === "ROLE_CUST") ? (
+              <PrivateRoute>
+                <CustMan />
+              </PrivateRoute>
+            ) : (
+              <PrivateRoute>
+                <Main />
+              </PrivateRoute>
+            )
           } />
           <Route exact path='/pages/cust/addcust' element={
             <PrivateRoute>

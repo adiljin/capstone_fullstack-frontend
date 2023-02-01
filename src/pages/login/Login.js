@@ -23,7 +23,7 @@ export default function Login() {
     const [jwt, setJwt] = useLocalState("", "jwt");
 
     useEffect(() => {
-        console.log(`JWT is: ${jwt}`)
+        // console.log(`JWT is: ${jwt}`)
     }, [jwt]);
 
     function sendLoginRequest() {
