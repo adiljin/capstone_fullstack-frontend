@@ -4,7 +4,6 @@ import { Link, useParams } from 'react-router-dom';
 
 export default function UserMan() {
     const [user, setUser] = useState([])
-    const [sUser, setsUser] = useState([])
     useEffect(() => {
         loadUsers();
     }, []);
@@ -18,13 +17,12 @@ export default function UserMan() {
 
     const deleteUser = async (idA, idU) => {
         const result = await axios.get(`http://localhost:3000/user/${idU}`);
-        setsUser(result.data);
-        if (sUser.authorities[0].authority !== "ROLE_ADMIN") {
+        if (result.data.authorities[0].authority === "ROLE_STD") {
             await axios.delete(`http://localhost:3000/authority/${idA}`)
             await axios.delete(`http://localhost:3000/user/${idU}`)
             loadUsers();
-        }else{
-            alert("Error: Admin role cannot be deleted");
+        } else {
+            alert("Error: Only ROLE_STD role can be deleted");
         }
     }
 
