@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import UserMan from './users/UserMan';
 import AddUser from './users/AddUser';
 import EditUser from './users/EditUser';
+import EditSingleUser from './users/EditSingleUser';
 import EditRole from './users/EditRole';
 import ViewUser from './users/ViewUser';
 import ClientMan from './pages/client/ClientMan';
@@ -77,7 +78,7 @@ function App() {
               ) : null
             }
           /> */}
-          
+
           MainLogist
 
           <Route exact path='/pages/main' element={
@@ -110,6 +111,13 @@ function App() {
             roles.find((role) => role.authority === "ROLE_ADMIN") ? (
               <PrivateRoute>
                 <EditUser />
+              </PrivateRoute>
+            ) : null
+          } />
+          <Route exact path='/editsingleser/:name' element={
+            roles.find((role) => role.authority !== "ROLE_STD") ? (
+              <PrivateRoute>
+                <EditSingleUser />
               </PrivateRoute>
             ) : null
           } />
