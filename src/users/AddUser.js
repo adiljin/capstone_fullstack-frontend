@@ -20,11 +20,27 @@ export default function AddUser() {
 
 
     const onSubmit = async (e) => {
-        if(user.name!==""&&user.username!==""&&user.email!==""){
+        if(user.username!==""&&user.password!==""){
             e.preventDefault();
-            await axios.post("http://localhost:8080/user", user)
+            await axios.post("http://localhost:3000/user", user)
+            .then(response => {
+                navigate("/users/UserMan")
+              })
+              .catch(error => {
+                if (error.response) {
+                  // The request was made and the server responded with a status code that falls out of the range of 2xx
+                  alert(error.response.data);
+                } else if (error.request) {
+                  // The request was made but no response was received
+                  alert("Error: No response received");
+                } else {
+                  // Something happened in setting up the request that triggered an Error
+                  alert("Error: " + error.message);
+                }
+              });
+        }else{
+            alert("Please fill out all fields.");
         }
-        navigate("/")
     }
 
     return (
@@ -42,7 +58,7 @@ export default function AddUser() {
                             <input
                                 type={"text"}
                                 className="form-control"
-                                placeholder="Enter your username"
+                                placeholder="Enter username"
                                 name="username"
                                 value={username}
                                 onChange={(e) => onInputChange(e)}
@@ -55,14 +71,14 @@ export default function AddUser() {
                             <input
                                 type={"text"}
                                 className="form-control"
-                                placeholder="Enter your email"
+                                placeholder="Enter password"
                                 name="password"
                                 value={password}
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>
                         <button type='submit' className='btn btn-outline-success'>Submit</button>
-                        <Link type='submit' className='btn btn-outline-danger mx-2'to={'/pages/main'}>Cancel</Link>
+                        <Link type='submit' className='btn btn-outline-danger mx-2'to={'/users/userman'}>Cancel</Link>
                     </form>
                 </div>
             </div>

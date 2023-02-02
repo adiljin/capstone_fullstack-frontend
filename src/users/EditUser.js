@@ -10,12 +10,12 @@ export default function EditUser() {
     const {id} = useParams()
 
     const [user, setUser] = useState({
-        name: "",
         username: "",
-        email: ""
+        password: "",
+        authorities: ""
     })
 
-    const { name, username, email } = user
+    const { username, password, authorities } = user
 
     const onInputChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value })
@@ -29,14 +29,14 @@ export default function EditUser() {
     const onSubmit = async (e) => {
         if(user.name!==""&&user.username!==""&&user.email!==""){
             e.preventDefault();
-            await axios.put(`http://localhost:8080/user/${id}`, user)
+            await axios.put(`http://localhost:3000/user/${id}`, user)
         }
-        navigate("/")
+        navigate("/users/userman")
     }
 
     // Show current name, email, username to change
     const loadUser = async()=>{
-        const result=await axios.get(`http://localhost:8080/user/${id}`)
+        const result=await axios.get(`http://localhost:3000/user/${id}`)
         setUser(result.data)
     }
 
@@ -49,46 +49,46 @@ export default function EditUser() {
                     <form onSubmit={(e) => onSubmit(e)}>
 
                         <div className='mb-3 text-start'>
-                            <label htmlFor='Name' className='form-label'>
-                                Name
-                            </label>
-                            <input
-                                type={"text"}
-                                className="form-control"
-                                placeholder="Enter your name"
-                                name="name"
-                                value={name}
-                                onChange={(e) => onInputChange(e)}
-                            />
-                        </div>
-                        <div className='mb-3 text-start'>
                             <label htmlFor='Username' className='form-label'>
-                                User Name
+                                Username
                             </label>
                             <input
                                 type={"text"}
                                 className="form-control"
-                                placeholder="Enter your username"
+                                placeholder="Enter username"
                                 name="username"
                                 value={username}
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>
                         <div className='mb-3 text-start'>
-                            <label htmlFor='Email' className='form-label'>
-                                Email
+                            <label htmlFor='Password' className='form-label'>
+                                Password
                             </label>
                             <input
                                 type={"text"}
                                 className="form-control"
-                                placeholder="Enter your email"
-                                name="email"
-                                value={email}
+                                placeholder="Enter password"
+                                name="password"
+                                // value={password}
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>
+                        {/* <div className='mb-3 text-start'>
+                            <label htmlFor='Role' className='form-label'>
+                                Role
+                            </label>
+                            <input
+                                type={"text"}
+                                className="form-control"
+                                placeholder="Enter role"
+                                name="authorities"
+                                value={authorities[0].authority}
+                                onChange={(e) => onInputChange(e)}
+                            />
+                        </div> */}
                         <button type='submit' className='btn btn-outline-success'>Submit</button>
-                        <Link type='submit' className='btn btn-outline-danger mx-2'to={'/pages/main'}>Cancel</Link>
+                        <Link type='submit' className='btn btn-outline-danger mx-2'to={'/users/userman'}>Cancel</Link>
                     </form>
                 </div>
             </div>
