@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 
 export default function UserMan() {
     const [user, setUser] = useState([])
+    const [sUser, setsUser] = useState([])
     useEffect(() => {
         loadUsers();
     }, []);
@@ -15,13 +16,19 @@ export default function UserMan() {
         setUser(result.data);
     };
 
-    const deleteUser = async (idA,idU) => {
-        await axios.delete(`http://localhost:3000/authority/${idA}`)
-        await axios.delete(`http://localhost:3000/user/${idU}`)
-        loadUsers();
+    const deleteUser = async (idA, idU) => {
+        const result = await axios.get(`http://localhost:3000/user/${idU}`);
+        setsUser(result.data);
+        if (sUser.authorities[0].authority !== "ROLE_ADMIN") {
+            await axios.delete(`http://localhost:3000/authority/${idA}`)
+            await axios.delete(`http://localhost:3000/user/${idU}`)
+            loadUsers();
+        }else{
+            alert("Error: Admin role cannot be deleted");
+        }
     }
 
-    user.map((us)=>{
+    user.map((us) => {
         // console.log(us);
         // console.log("ID " + us.authorities[0].id);
     })
@@ -52,9 +59,9 @@ export default function UserMan() {
                                     <td>{usere.authorities[0].authority}</td>
                                     {/* <td>{routee.id}</td> */}
                                     <td>
-                                    <Link className='btn btn-outline-dark mx-2' to={`/editrole/${usere.authorities[0].id}`}>Role</Link>
+                                        <Link className='btn btn-outline-dark mx-2' to={`/editrole/${usere.authorities[0].id}`}>Role</Link>
                                         <Link className='btn btn-outline-success mx-2' to={`/edituser/${usere.id}`}>Edit</Link>
-                                        <button className='btn btn-outline-danger mx-2' onClick={() =>deleteUser(usere.authorities[0].id,usere.id)}>Delete</button>
+                                        <button className='btn btn-outline-danger mx-2' onClick={() => deleteUser(usere.authorities[0].id, usere.id)}>Delete</button>
                                     </td>
                                 </tr>
                             )
