@@ -43,6 +43,20 @@ export default function ViewClient() {
             return;
         }
         await axios.delete(`http://localhost:3000/${cls}/del/${id}`)
+        .then(response => {
+        })
+        .catch(error => {
+          if (error.response) {
+            // The request was made and the server responded with a status code that falls out of the range of 2xx
+            alert(error.response.data);
+          } else if (error.request) {
+            // The request was made but no response was received
+            alert("Error: No response received");
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            alert("Error: " + error.message);
+          }
+        });
         loadClients();
     }
 
