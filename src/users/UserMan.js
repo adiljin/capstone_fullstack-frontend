@@ -22,7 +22,7 @@ export default function UserMan() {
             await axios.delete(`http://localhost:3000/user/${idU}`)
             loadUsers();
         } else {
-            alert("Error: Only ROLE_STD role can be deleted");
+            alert("Error: Only ROLE_STD can be deleted");
         }
     }
 
