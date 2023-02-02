@@ -35,7 +35,13 @@ export default function ViewClient() {
     };
 
     const deleteRoute = async (id, cls) => {
-        console.log(cls);
+        if (
+            window.confirm(
+            `Please confirm deletion`
+            ) === false
+        ) {
+            return;
+        }
         await axios.delete(`http://localhost:3000/${cls}/del/${id}`)
         loadClients();
     }

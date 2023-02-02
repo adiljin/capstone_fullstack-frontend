@@ -16,6 +16,13 @@ export default function UserMan() {
     };
 
     const deleteUser = async (idA, idU) => {
+        if (
+            window.confirm(
+            `Please confirm deletion`
+            ) === false
+        ) {
+            return;
+        }
         const result = await axios.get(`http://localhost:3000/user/${idU}`);
         if (result.data.authorities[0].authority === "ROLE_STD") {
             await axios.delete(`http://localhost:3000/authority/${idA}`)

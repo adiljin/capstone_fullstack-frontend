@@ -26,6 +26,13 @@ export default function RoutMan() {
     // }
 
     const deleteRoute = async (id) => {
+        if (
+            window.confirm(
+            `Please confirm deletion`
+            ) === false
+        ) {
+            return;
+        }
         await axios.delete(`http://localhost:3000/rout/route/${id}`)
         loadRoutes();
     }
@@ -57,7 +64,7 @@ export default function RoutMan() {
                                     {/* <td>{routee.id}</td> */}
                                     <td>
                                         <Link className='btn btn-outline-success mx-2' to={`/pages/routes/editroute/${routee.id}`}>Edit</Link>
-                                        <button className='btn btn-outline-danger mx-2' onClick={() =>deleteRoute(routee.id)}>Delete</button>
+                                        <button className='btn btn-outline-danger mx-2' onClick={() => deleteRoute(routee.id)}>Delete</button>
                                     </td>
                                 </tr>
                             )

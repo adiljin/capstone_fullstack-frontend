@@ -16,6 +16,13 @@ export default function ViewCust() {
     };
 
     const deleteRoute = async (id) => {
+        if (
+            window.confirm(
+            `Please confirm deletion`
+            ) === false
+        ) {
+            return;
+        }
         await axios.delete(`http://localhost:3000/cust/${id}`)
         loadCust();
     }
