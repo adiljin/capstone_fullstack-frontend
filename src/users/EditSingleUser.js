@@ -18,7 +18,9 @@ export default function EditSingleUser() {
     const { username, password, authorities } = user
 
     const onInputChange = (e) => {
-        setUser({ ...user, [e.target.name]: e.target.value })
+        if(e.target.value === 'password'){
+            setUser({ ...user, [e.target.name]: e.target.value })
+        }
     }
 
     // Show current name, email, username to change
