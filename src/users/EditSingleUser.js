@@ -58,7 +58,7 @@ export default function EditSingleUser() {
                                 placeholder="Enter username"
                                 name="username"
                                 value={username}
-                                onChange={(e) => onInputChange(e)}
+                                readOnly={true}
                             />
                         </div>
                         <div className='mb-3 text-start'>
