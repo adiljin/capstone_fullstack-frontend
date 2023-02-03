@@ -18,7 +18,7 @@ export default function EditSingleUser() {
     const { username, password, authorities } = user
 
     const onInputChange = (e) => {
-        if(e.target.value === 'password'){
+        if(e.target.name === 'password'){
             setUser({ ...user, [e.target.name]: e.target.value })
         }
     }
