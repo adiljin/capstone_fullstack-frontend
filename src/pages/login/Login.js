@@ -13,7 +13,7 @@ import {
     MDBIcon
 }
     from 'mdb-react-ui-kit';
-
+import './background/style.css';
 
 export default function Login() {
 
@@ -59,31 +59,33 @@ export default function Login() {
 
     return (
 
-        <MDBContainer fluid>
+        <div className='background-image'>
+            <MDBContainer fluid>
 
-            <MDBRow className='d-flex justify-content-center align-items-center h-100'>
-                <MDBCol col='12'>
+                <MDBRow className='d-flex justify-content-center align-items-center h-100'>
+                    <MDBCol col='12'>
 
-                    <MDBCard className='bg-dark text-white my-5 mx-auto' style={{ borderRadius: '1rem', maxWidth: '400px' }}>
-                        <MDBCardBody className='p-5 d-flex flex-column align-items-center mx-auto w-100'>
+                        <MDBCard className='bg-dark text-white my-5 mx-auto' style={{ borderRadius: '1rem', maxWidth: '400px' }}>
+                            <MDBCardBody className='p-5 d-flex flex-column align-items-center mx-auto w-100'>
 
-                            <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
-                            <p className="text-white-50 mb-5">Please enter your username and password!</p>
+                                <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
+                                <p className="text-white-50 mb-5">Please enter your username and password!</p>
 
-                            <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white' label='Username' id="username" name="username" value={username} type={"username"} onChange={(e) => setUsername(e.target.value)} size="lg" />
-                            <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white' label='Password' id="password" name="password" value={password} type={"password"} onChange={(e) => setPassword(e.target.value)} size="lg" />
+                                <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white' label='Username' id="username" name="username" value={username} type={"username"} onChange={(e) => setUsername(e.target.value)} size="lg" />
+                                <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white' label='Password' id="password" name="password" value={password} type={"password"} onChange={(e) => setPassword(e.target.value)} size="lg" />
 
-                            <button class="btn btn-dark btn-lg" id='submit' type='button' onClick={() => sendLoginRequest()}>
-                                LOGIN
-                            </button>
+                                <button class="btn btn-dark btn-lg" id='submit' type='button' onClick={() => sendLoginRequest()}>
+                                    LOGIN
+                                </button>
 
-                        </MDBCardBody>
-                    </MDBCard>
+                            </MDBCardBody>
+                        </MDBCard>
 
-                </MDBCol>
-            </MDBRow>
+                    </MDBCol>
+                </MDBRow>
 
-        </MDBContainer>
+            </MDBContainer>
+        </div>
 
         // <div classNameName='container my-12'>
         //     <div classNameName='row'>
