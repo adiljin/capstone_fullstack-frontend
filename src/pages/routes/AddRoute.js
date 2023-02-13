@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { SERVER_IP } from '../network/net.js';
 
 export default function AddRoute() {
 
@@ -22,7 +23,7 @@ export default function AddRoute() {
     const onSubmit = async (e) => {
         if (route.portName !== "" && route.priceFrom !== "") {
             e.preventDefault();
-            await axios.post("http://localhost:3000/rout", route)
+            await axios.post(`http://${SERVER_IP}:3000/rout`, route)
         }
         navigate("/pages/routman")
     }

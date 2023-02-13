@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { SERVER_IP } from '../network/net.js';
 
 export default function EditCust() {
 
@@ -30,7 +31,7 @@ export default function EditCust() {
     const onSubmit = async (e) => {
         if(cust.name!==""&&cust.address!==""&&cust.number!==""&&cust.e_mail!==""){
             e.preventDefault();
-            await axios.put(`http://localhost:3000/cust/set/${id}`, cust)
+            await axios.put(`http://${SERVER_IP}:3000/cust/set/${id}`, cust)
             navigate("/pages/cust/viewcust")
         }else{
             alert("Please fill out all fields.");
@@ -40,7 +41,7 @@ export default function EditCust() {
 
     // Show current name, email, username to change
     const loadCust = async()=>{
-        const result=await axios.get(`http://localhost:3000/cust/${id}`)
+        const result=await axios.get(`http://${SERVER_IP}:3000/cust/${id}`)
         setCust(result.data)
     }
 

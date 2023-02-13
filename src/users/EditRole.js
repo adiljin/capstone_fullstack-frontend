@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { SERVER_IP } from '../pages/network/net.js';
 
 export default function EditRole() {
 
@@ -39,14 +40,14 @@ export default function EditRole() {
     const onSubmit = async (e) => {
         if (role.authority !== "") {
             e.preventDefault();
-            await axios.put(`http://localhost:3000/authority/${id}`, role)
+            await axios.put(`http://${SERVER_IP}:3000/authority/${id}`, role)
         }
         navigate("/users/userman")
     }
 
     // Show current name, email, username to change
     const loadRole = async () => {
-        const result = await axios.get(`http://localhost:3000/authority/${id}`)
+        const result = await axios.get(`http://${SERVER_IP}:3000/authority/${id}`)
         setUser(result.data)
     }
 

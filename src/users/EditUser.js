@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { SERVER_IP } from '../pages/network/net.js';
 
 export default function EditUser() {
 
@@ -29,14 +30,14 @@ export default function EditUser() {
     const onSubmit = async (e) => {
         if(user.name!==""&&user.username!==""&&user.email!==""){
             e.preventDefault();
-            await axios.put(`http://localhost:3000/user/${id}`, user)
+            await axios.put(`http://${SERVER_IP}:3000/user/${id}`, user)
         }
         navigate("/users/userman")
     }
 
     // Show current name, email, username to change
     const loadUser = async()=>{
-        const result=await axios.get(`http://localhost:3000/user/${id}`)
+        const result=await axios.get(`http://${SERVER_IP}:3000/user/${id}`)
         setUser(result.data)
     }
 

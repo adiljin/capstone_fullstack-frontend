@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom';
+import { SERVER_IP } from '../network/net.js';
 
 export default function RoutMan() {
     const [route, setRoute] = useState([])
@@ -11,13 +12,8 @@ export default function RoutMan() {
     const { id } = useParams()
 
     const loadRoutes = async () => {
-        // const result = await axios.get("http://localhost:3000/rout/routes");
         let result = null;
-        try{
-            result = await axios.get("http://localhost:3000/rout/routes");
-        }catch(error){
-            result = await axios.get("http://192.168.1.151:3000/rout/routes");
-        }
+        result = await axios.get(`http://${SERVER_IP}:3000/rout/routes`);
         setRoute(result.data);
     };
 
@@ -39,7 +35,7 @@ export default function RoutMan() {
         ) {
             return;
         }
-        await axios.delete(`http://localhost:3000/rout/route/${id}`)
+        await axios.delete(`http://${SERVER_IP}:3000/rout/route/${id}`)
         .then(response => {
         })
         .catch(error => {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'
+import { SERVER_IP } from '../network/net.js';
 
 export default function AddFre() {
 
@@ -106,7 +107,7 @@ export default function AddFre() {
     // const { id } = useParams()
 
     const loadClients = async () => {
-        const promises = ships.map(({ type }) => axios.get(`http://localhost:3000/${type}/${type}s`));
+        const promises = ships.map(({ type }) => axios.get(`http://${SERVER_IP}:3000/${type}/${type}s`));
         const responses = await Promise.all(promises);
         responses.forEach(({ data }, index) => {
             const { setter } = ships[index];
@@ -115,12 +116,12 @@ export default function AddFre() {
     };
 
     const loadCust = async () => {
-        const result = await axios.get("http://localhost:3000/cust/get");
+        const result = await axios.get(`http://${SERVER_IP}:3000/cust/get`);
         setCust(result.data);
     };
 
     const loadRoutes = async () => {
-        const result = await axios.get("http://localhost:3000/rout/routes");
+        const result = await axios.get(`http://${SERVER_IP}:3000/rout/routes`);
         setRoute(result.data);
     };
 
@@ -130,7 +131,7 @@ export default function AddFre() {
             setFreight({ ...freight, fweight: freWeight, price: frePrice});
             console.log(freight)
             e.preventDefault();
-            await axios.post(`http://localhost:3000/fre`, freight)
+            await axios.post(`http://${SERVER_IP}:3000/fre`, freight)
             navigate("/pages/freman")
         } else {
             e.preventDefault();

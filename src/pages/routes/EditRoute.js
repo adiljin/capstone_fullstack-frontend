@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { SERVER_IP } from '../network/net.js';
 
 export default function EditRoute() {
 
@@ -28,15 +29,16 @@ export default function EditRoute() {
     const onSubmit = async (e) => {
         if(route.portName!==""&&route.priceFrom!==""){
             e.preventDefault();
-            await axios.put(`http://localhost:3000/rout/route/${id}`, route)
+            await axios.put(`http://${SERVER_IP}:3000/rout/route/${id}`, route);
         }
         navigate("/pages/routman")
     }
 
     // Show current name, email, username to change
     const loadRoute = async()=>{
-        const result=await axios.get(`http://localhost:3000/rout/route/${id}`)
-        setRoute(result.data)
+        let result = null;
+        result = await axios.get(`http://${SERVER_IP}:3000/rout/route/${id}`);
+        setRoute(result.data);
     }
 
     return (

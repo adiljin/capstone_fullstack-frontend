@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { SERVER_IP } from '../network/net.js';
 
 export default function AddClient() {
 
@@ -80,7 +81,7 @@ export default function AddClient() {
     const onSubmit = async (e) => {
         if (client.name !== "" && client.address !== "" && client.number !== "" && client.email !== "" && client.years !== "" && client.typeLease !== "") {
             e.preventDefault();
-            await axios.post(`http://localhost:3000/${shi.shipType}`, client)
+            await axios.post(`http://${SERVER_IP}:3000/${shi.shipType}`, client)
             navigate("/pages/clientman")
         } else {
             console.log(client.name + " " + client.address + " " + client.number + " " + client.email + " " + client.years + " " + client.typeLease + " " + shi.shipType)

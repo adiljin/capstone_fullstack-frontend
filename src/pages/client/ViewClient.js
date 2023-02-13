@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom';
+import { SERVER_IP } from '../network/net.js';
 
 export default function ViewClient() {
 
@@ -26,7 +27,7 @@ export default function ViewClient() {
     const { id } = useParams()
 
     const loadClients = async () => {
-        const promises = ships.map(({ type }) => axios.get(`http://localhost:3000/${type}/${type}s`));
+        const promises = ships.map(({ type }) => axios.get(`http://${SERVER_IP}:3000/${type}/${type}s`));
         const responses = await Promise.all(promises);
         responses.forEach(({ data }, index) => {
             const { setter } = ships[index];
@@ -42,7 +43,7 @@ export default function ViewClient() {
         ) {
             return;
         }
-        await axios.delete(`http://localhost:3000/${cls}/del/${id}`)
+        await axios.delete(`http://${SERVER_IP}:3000/${cls}/del/${id}`)
         .then(response => {
         })
         .catch(error => {

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { SERVER_IP } from '../pages/network/net.js';
 
 export default function ViewUser() {
 
@@ -17,7 +18,7 @@ export default function ViewUser() {
     },[]);
 
     const loadUser=async()=>{
-        const result=await axios.get(`http://localhost:8080/user/${id}`, user)
+        const result=await axios.get(`http://${SERVER_IP}:8080/user/${id}`, user)
         setUser(result.data)
     }
 

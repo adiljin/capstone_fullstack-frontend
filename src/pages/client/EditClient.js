@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { SERVER_IP } from '../network/net.js';
 
 export default function EditClient() {
 
@@ -32,7 +33,7 @@ export default function EditClient() {
     const onSubmit = async (e) => {
         if(client.name!==""&&client.address!==""&&client.number!==""&&client.e_mail!==""){
             e.preventDefault();
-            await axios.put(`http://localhost:3000/${type}/${id}`, client)
+            await axios.put(`http://${SERVER_IP}:3000/${type}/${id}`, client)
             navigate(`/pages/clientman/viewcli`)
         }else{
             alert("Please fill out all fields.");
@@ -42,7 +43,7 @@ export default function EditClient() {
 
     // Show current name, email, username to change
     const loadClient = async()=>{
-        const result=await axios.get(`http://localhost:3000/${type}/${type}s/${id}`)
+        const result=await axios.get(`http://${SERVER_IP}:3000/${type}/${type}s/${id}`)
         setClient(result.data)
     }
 

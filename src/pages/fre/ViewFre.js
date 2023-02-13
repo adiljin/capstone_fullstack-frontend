@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom';
+import { SERVER_IP } from '../network/net.js';
 
 export default function ViewFre() {
     const [fre, setCust] = useState([])
@@ -11,7 +12,7 @@ export default function ViewFre() {
     const { id } = useParams()
 
     const loadFre = async () => {
-        const result = await axios.get("http://localhost:3000/fre/get");
+        const result = await axios.get(`http://${SERVER_IP}:3000/fre/get`);
         setCust(result.data);
     };
 
@@ -25,7 +26,7 @@ export default function ViewFre() {
         ) {
             return;
         }
-        await axios.delete(`http://localhost:3000/fre/${id}`)
+        await axios.delete(`http://${SERVER_IP}:3000/fre/${id}`)
         loadFre();
     }
 

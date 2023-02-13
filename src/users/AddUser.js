@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { SERVER_IP } from '../pages/network/net.js';
 
 export default function AddUser() {
 
@@ -22,7 +23,7 @@ export default function AddUser() {
     const onSubmit = async (e) => {
         if(user.username!==""&&user.password!==""){
             e.preventDefault();
-            await axios.post("http://localhost:3000/user", user)
+            await axios.post(`http://${SERVER_IP}:3000/user`, user)
             .then(response => {
                 navigate("/users/UserMan")
               })

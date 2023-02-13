@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { SERVER_IP } from '../network/net.js';
 
 export default function AddCust() {
 
@@ -23,7 +24,7 @@ export default function AddCust() {
     const onSubmit = async (e) => {
         if (cust.name !== "" && cust.address !== "" && cust.number !== "" && cust.e_mail) {
             e.preventDefault();
-            await axios.post(`http://localhost:3000/cust`, cust)
+            await axios.post(`http://${SERVER_IP}:3000/cust`, cust)
             navigate("/pages/CustMan")
         } else {
             alert("Please fill out all fields.");

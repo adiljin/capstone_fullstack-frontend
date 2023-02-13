@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom';
+import { SERVER_IP } from '../pages/network/net.js';
 
 export default function UserMan() {
     const [user, setUser] = useState([])
@@ -11,7 +12,7 @@ export default function UserMan() {
     const { id } = useParams()
 
     const loadUsers = async () => {
-        const result = await axios.get("http://localhost:3000/user/users");
+        const result = await axios.get(`http://${SERVER_IP}:3000/user/users`);
         setUser(result.data);
     };
 
@@ -23,10 +24,10 @@ export default function UserMan() {
         ) {
             return;
         }
-        const result = await axios.get(`http://localhost:3000/user/${idU}`);
+        const result = await axios.get(`http://${SERVER_IP}:3000/user/${idU}`);
         if (result.data.authorities[0].authority === "ROLE_STD") {
-            await axios.delete(`http://localhost:3000/authority/${idA}`)
-            await axios.delete(`http://localhost:3000/user/${idU}`)
+            await axios.delete(`http://${SERVER_IP}:3000/authority/${idA}`)
+            await axios.delete(`http://${SERVER_IP}:3000/user/${idU}`)
             loadUsers();
         } else {
             alert("Error: Only ROLE_STD can be deleted");
