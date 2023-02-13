@@ -11,7 +11,13 @@ export default function RoutMan() {
     const { id } = useParams()
 
     const loadRoutes = async () => {
-        const result = await axios.get("http://localhost:3000/rout/routes");
+        // const result = await axios.get("http://localhost:3000/rout/routes");
+        let result = null;
+        try{
+            result = await axios.get("http://localhost:3000/rout/routes");
+        }catch(error){
+            result = await axios.get("http://192.168.1.151:3000/rout/routes");
+        }
         setRoute(result.data);
     };
 
