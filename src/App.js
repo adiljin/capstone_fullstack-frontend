@@ -256,7 +256,7 @@ function App() {
               </PrivateRoute>
             ) : null
           } />
-          <Route exact path='/login' element={<Login />} />
+          <Route exact path='/' element={<Login />} />
         </Routes>
       </Router>
     </div>

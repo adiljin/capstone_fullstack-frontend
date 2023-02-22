@@ -15,7 +15,7 @@ export default function Main() {
                         <Link class="btn btn-dark" type="button" to={`/users/UserMan`}>Manage Users</Link>
                         <button class="btn btn-dark my-4" type="button" onClick={() => {
                             localStorage.clear();
-                            window.location.href = "/login";
+                            window.location.href = "/";
                         }}>Logout</button>
                     </div>
                 }
