@@ -39,7 +39,7 @@ function App() {
   const [roles, setRoles] = useState([]);
 
   useEffect(() => {
-    document.title = "ShipMate";
+    document.title = "ShipMate - Streamline Logistics";
     setRoles(getRolesFromJWT());
   }, []);
 
